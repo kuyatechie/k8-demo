@@ -22,7 +22,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
       containers:
       - name: myapp
-        image: localhost/myapp:1.0.0
+        image: localhost/myapp:1.1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8000

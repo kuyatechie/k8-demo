@@ -16,7 +16,7 @@ spec:
             value: myapp-database
       containers:
       - name: myapp-migrate
-        image: localhost/myapp:1.0.0
+        image: localhost/myapp:1.1.0
         command: ["python",  "manage.py", "migrate"]
         env:
           - name: DATABASE_HOSTNAME
