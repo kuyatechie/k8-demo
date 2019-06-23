@@ -1,0 +1,8 @@
+myappTag: 1.0.0
+myappPort: 8000
+imageRegistry: localhost
+pullPolicy: Never
+databasePassword: postgres
+databaseUser: postgres
+databaseName: myapp_db
+databaseHostnamePrefix: database

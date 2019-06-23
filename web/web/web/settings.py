@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'web.wsgi.application'
 
 DATABASE_USER = os.getenv("DATABASE_USER", "postgres")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "postgres")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "db_1")
-DATABASE_HOSTNAME = os.getenv("DATABASE_HOSTNAME", "localhost")
-DATABASE_PORT = os.getenv("DATABASE_PORT", "32770")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "myapp_db")
+DATABASE_HOSTNAME = os.getenv("DATABASE_HOSTNAME", "myapp-database")
+DATABASE_PORT = os.getenv("DATABASE_PORT", "5432")
 
 DATABASES = {
     'default': {

@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myapp-migrate
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: check-db-ready
+        image: localhost/postgres:alpine
+        command: ['sh', '-c',
+          'until pg_isready -h myapp-database -p 5432;
+          do echo waiting for database; sleep 2; done;']
+        env:
+          - name: DATABASE_HOSTNAME
+            value: myapp-database
+      containers:
+      - name: myapp-migrate
+        image: localhost/myapp:1.0.0
+        command: ["python",  "manage.py", "migrate"]
+        env:
+          - name: DATABASE_HOSTNAME
+            value: myapp-database
+      restartPolicy: Never
+  backoffLimit: 4

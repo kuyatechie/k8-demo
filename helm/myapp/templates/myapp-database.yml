@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  labels:
+    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+spec:
+  containers:
+  - name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+    image: {{.Values.imageRegistry}}/postgres:alpine
+    imagePullPolicy: {{.Values.pullPolicy}}
+    ports:
+      - containerPort: 5432
+    env:
+      - name: POSTGRES_PASSWORD
+        value: {{default "postgres" .Values.databasePassword}}
+      - name: POSTGRES_USER
+        value: {{default "postgres" .Values.databaseUser}}
+      - name: POSTGRES_DB
+        value: {{default "myapp_db" .Values.databaseName}}
+---
+apiVersion: v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  namespace: default
+  labels:
+    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+spec:
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  type: ClusterIP
+status:
+  loadBalancer: {}

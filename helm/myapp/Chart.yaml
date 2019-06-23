@@ -1,0 +1,13 @@
+apiVersion: v1
+name: myapp
+version: 1.0.0
+description: A sample appliction consisting of replicated web app connecting to an external database.
+home: https://github.com/kuyatechie/k8-barona
+sources:
+  - https://github.com/kuyatechie/k8-barona
+maintainers:
+  - name: Arvin Cudanin
+    email: arvin.cudanin@gmail.com
+    url: https://github.com/kuyatechie/k8-barona
+appVersion: 1
+deprecated: false

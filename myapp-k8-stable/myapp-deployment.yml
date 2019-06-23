@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      initContainers:
+      - name: check-db-ready
+        image: localhost/postgres:alpine
+        command: ['sh', '-c',
+          'until pg_isready -h myapp-database -p 5432;
+          do echo waiting for database; sleep 2; done;']
+      containers:
+      - name: myapp
+        image: localhost/myapp:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+          - name: DATABASE_PASSWORD
+            value: postgres
+          - name: DATABASE_USER
+            value: postgres
+          - name: DATABASE_NAME
+            value: myapp_db
+          - name: DATABASE_HOSTNAME
+            value: myapp-database
+          - name: DATABASE_PORT
+            value: "5432"
+---
+apiVersion: v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: myapp-deployment
+  namespace: default
+  labels:
+    app: myapp-deployment
+spec:
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: myapp
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,5 +1,9 @@
 # k8-barona
 
+Summary
+-------
+
+
 Prerequisites
 -------------
 - Docker Desktop (https://www.docker.com/products/docker-desktop)
@@ -17,6 +21,7 @@ To install the RBAC Auth to allow cluster-admin access to the UI
 ```
 kubectl apply -f kubernetes-dashboard/dashboard-admin.yml
 ```
+https://github.com/kubernetes/dashboard/wiki/Access-control#admin-privileges
 
 - Helm (https://github.com/helm/helm)
 Helm is a tool for managing Kubernetes charts. Charts are packages of pre-configured Kubernetes resources.
@@ -43,6 +48,4 @@ django-admin startproject web
 cd web
 python3 manage.py startapp table
 ```
-
-
 
