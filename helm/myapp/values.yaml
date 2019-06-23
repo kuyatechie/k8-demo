@@ -6,3 +6,4 @@ databasePassword: postgres
 databaseUser: postgres
 databaseName: myapp_db
 databaseHostnamePrefix: database
+databaseMigrationPrefix: 1-1-0

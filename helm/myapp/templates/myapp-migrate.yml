@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Release.Name }}-migrate
+  name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationPrefix}}
 spec:
   template:
     spec:
@@ -15,7 +15,7 @@ spec:
           - name: DATABASE_HOSTNAME
             value: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
       containers:
-      - name: {{ .Release.Name }}-migrate
+      - name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationPrefix}}
         image: {{.Values.imageRegistry}}/myapp:{{.Values.myappTag}}
         command: ["python",  "manage.py", "migrate"]
         env:
