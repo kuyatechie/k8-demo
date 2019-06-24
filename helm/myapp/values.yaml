@@ -5,5 +5,5 @@ pullPolicy: Never
 databasePassword: postgres
 databaseUser: postgres
 databaseName: myapp_db
-databaseHostnamePrefix: database
-databaseMigrationPrefix: 1-1-0
+databaseHostnameSuffix: database
+databaseMigrationSuffix: 1-1-0

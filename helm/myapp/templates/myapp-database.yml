@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  name: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
   labels:
-    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+    app: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
 spec:
   containers:
-  - name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  - name: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
     image: {{.Values.imageRegistry}}/postgres:alpine
     imagePullPolicy: {{.Values.pullPolicy}}
     ports:
@@ -23,17 +23,17 @@ apiVersion: v1
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+  name: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
   namespace: default
   labels:
-    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+    app: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
 spec:
   ports:
   - protocol: TCP
     port: 5432
     targetPort: 5432
   selector:
-    app: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+    app: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
   type: ClusterIP
 status:
   loadBalancer: {}

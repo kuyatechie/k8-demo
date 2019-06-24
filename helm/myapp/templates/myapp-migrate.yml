@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationPrefix}}
+  name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationSuffix}}
 spec:
   template:
     spec:
@@ -13,13 +13,13 @@ spec:
           do echo waiting for database; sleep 2; done;']
         env:
           - name: DATABASE_HOSTNAME
-            value: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+            value: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
       containers:
-      - name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationPrefix}}
+      - name: {{ .Release.Name }}-migrate-{{.Values.databaseMigrationSuffix}}
         image: {{.Values.imageRegistry}}/myapp:{{.Values.myappTag}}
         command: ["python",  "manage.py", "migrate"]
         env:
           - name: DATABASE_HOSTNAME
-            value: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+            value: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
       restartPolicy: Never
   backoffLimit: 4

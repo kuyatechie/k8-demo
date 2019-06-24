@@ -22,7 +22,7 @@ spec:
           do echo waiting for database; sleep 2; done;']
         env:
           - name: DATABASE_HOSTNAME
-            value: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+            value: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
       containers:
       - name: myapp
         image: {{.Values.imageRegistry}}/myapp:{{.Values.myappTag}}
@@ -37,7 +37,7 @@ spec:
           - name: DATABASE_NAME
             value: {{default "myapp_db" .Values.databaseName}}
           - name: DATABASE_HOSTNAME
-            value: {{ .Release.Name }}-{{.Values.databaseHostnamePrefix}}
+            value: {{ .Release.Name }}-{{.Values.databaseHostnameSuffix}}
 
 ---
 apiVersion: v1
