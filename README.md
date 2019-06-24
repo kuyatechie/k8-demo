@@ -1,9 +1,12 @@
-#k8-barona
+k8-barona
+---------
 
-##Summary
+Summary
+-------
 This project is a demo showing the strength of using dockerization and orchestration technologies by automating the deployment of a simple web app that connects to a database.
 
-###Deep Dive
+Deep Dive
+---------
 
 The system includes a web application capable of serving HTTP requests via REST APIs to track attendance of a group of people.
 All components are dockerized and is maintained using semantic versioning.
@@ -22,7 +25,8 @@ The flow described below:
 Web Application: Written using DjangoRestFramework.
 Database: Single PSQL instance. 
 
-###Installation Prerequisites
+Installation Prerequisites
+--------------------------
 
 All development and testing are done in a single node Kubernetes Cluster running in MacOS Mojave Environment - MBP 18.5.0 Darwin Kernel Version 18.5.0.
 It is assumed that all deployments  are compatible to any Linux-based distribution given the required installations, dependencies and permissions are provided.
@@ -64,7 +68,8 @@ Python 3.7.2
 Django REST framework is a powerful and flexible toolkit for building Web APIs.
 
 
-###Creating the Django web application
+Creating the Django web application
+-----------------------------------
 The Django application requires Python3 Environment for development and test running the server. It is best to create a virtual environment to not affect any dependencies already installed as majority of Linux based distros have Python 2.7 already in place. 
 
 Create and activate the virtual environment
@@ -84,7 +89,8 @@ cd web
 python3 manage.py startapp table
 ```
 
-###How to use the web application
+How to use the web application
+------------------------------
 All services in the web application are accessed via HTTP request. But the web application is dependent on a running psql db instance.
 A successful connection should first be established before running the web app. A dockerized instance can be used for development purposes.
 
@@ -144,7 +150,8 @@ _POST http://localhost:port/table/create_ : Create attendance entry in attendanc
 
 _GET http://localhost:port/table/view/date:YYYYMMDD_ : View complete attendance sheet for a certain date
 
-##Application build, versioning and docker releases
+Application build, versioning and docker releases
+-------------------------------------------------
 Semantic versioning is used for this project. A git repository tracks all code changes and releases.
 https://github.com/kuyatechie/k8-barona/
 
@@ -163,7 +170,8 @@ docker build --tag <docker_registry>/myapp:<version>  web/web/
 
 Now we are ready to deploy the containers in the Kubernetes Cluster.
 
-##Deployment to Kubernetes Cluster
+Deployment to Kubernetes Cluster
+--------------------------------
 Kubernetes scripts consist of multiple yaml files that describe how application components are integrated, deployed and maintained.
 
 For this deployment efforts, the 
@@ -211,7 +219,8 @@ _databaseHostnameSuffix_: String suffix to append to the database hostname.
 
 _databaseMigrationSuffix_: String suffix to append to the migrate job. Must be unique for every releases requiring database schema updates.
 
-### Running Helm Deployment
+Running Helm Chart Deployment
+-----------------------------
 To test deploy, use the following command. It will return a unique installation name to let user recognize all related components deployed under one package.
 
 ``` 
