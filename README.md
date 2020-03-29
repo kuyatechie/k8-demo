@@ -269,10 +269,3 @@ To delete the whole Kubernetes package (caution: this action is non-reversible)
 arvin$ helm delete existing-tarsier
 release "existing-tarsier" deleted
 ```
-
-
-Developer:
-----------
-Arvin E. Cudanin - DevOps Engineer
-
-email: arvin.cudanin@gmail.com
