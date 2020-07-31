@@ -1,4 +1,4 @@
-k8-barona
+k8-demo
 ---------
 
 Summary
@@ -74,8 +74,8 @@ The Django application requires Python3 Environment for development and test run
 
 Create and activate the virtual environment
 ``` 
-virtualenv ~/.virtualenvironments/k8-barona
-source ~/.virtualenvironments/k8-barona/bin/activate
+virtualenv ~/.virtualenvironments/k8-demo
+source ~/.virtualenvironments/k8-demo/bin/activate
 ```
 
 Install all required packages
@@ -153,14 +153,14 @@ _GET http://localhost:port/table/view/date:YYYYMMDD_ : View complete attendance 
 Application build, versioning and docker releases
 -------------------------------------------------
 Semantic versioning is used for this project. A git repository tracks all code changes and releases.
-https://github.com/kuyatechie/k8-barona/
+https://github.com/kuyatechie/k8-demo/
 
 A docker registry is required for this. This registry should be able to store docker releases and the Kubernetes should be able to pull the images from this registry.
 It can also be set up locally for ease of usage.
 
 To build and release the web application, a base Python docker image is needed. This is to cut external dependencies from outside the network and to speed up builds requiring no changes in dependencies.
 ``` 
-docker build --tag <docker_registry>/python:k8-barona-dev web/
+docker build --tag <docker_registry>/python:k8-demo-dev web/
 ```
 
 Everything is deployed via containers. To package a certain version, docker tags are used.
